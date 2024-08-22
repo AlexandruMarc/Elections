@@ -1,5 +1,6 @@
 import React from "react";
-
+//Set the contactDetail here as profile 
+//and then provide the an alternative to save as profile
 function Profile() {
 	return (
 		<header className="header">
