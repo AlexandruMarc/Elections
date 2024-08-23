@@ -18,14 +18,12 @@ function Participant({ user }) {
 					<i className="bi bi-envelope"></i> {user.email.substring(0, 20)}
 				</p>
 				<p>
-					<i className="bi bi-body-text"></i> {user.description.substring(0, 20)}
+					<i className="bi bi-body-text"></i> {user.description ? user.description.substring(0, 20) : ""}
 				</p>
 				<p>
 					<i className="bi bi-hand-thumbs-up"></i> {user.votes}
 				</p>
-				<p>
-				{user.electionParticipation === true ? <i className="bi bi-check-circle"></i> : <i className="bi bi-x-circle"></i>} Candidate
-				</p>
+				<p>{user.electionParticipation === true ? <i className="bi bi-check-circle"></i> : <i className="bi bi-x-circle"></i>} Candidate</p>
 			</div>
 		</Link>
 	);

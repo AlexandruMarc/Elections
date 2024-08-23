@@ -8,11 +8,17 @@ import Participants from "./components/Participants";
 
 function App() {
 	const fileRef = useRef();
-  const dialogRef = useRef();
+	const dialogRef = useRef();
 	const [data, setData] = useState({});
 	const [currentPage, setCurrentPage] = useState(0);
 	const [usersData, setUsersData] = useState({});
-  const [userData, setUserData] = useState(null);
+	const [userData, setUserData] = useState({
+		id: "",
+		name: "",
+		email: "",
+		password: "",
+		photo: "",
+	});
 	const [file, setFile] = useState(undefined);
 	const [values, setValues] = useState({
 		name: "",
@@ -31,6 +37,7 @@ function App() {
 			console.log(error);
 		}
 	};
+
 	const getUsers = async (page = 0, size = 10) => {
 		try {
 			setCurrentPage(page);
@@ -44,29 +51,34 @@ function App() {
 
 	const onChange = (event) => {
 		setValues({ ...values, [event.target.name]: event.target.value });
-		//console.log("File: App.js", "Line 36:", values);
 	};
+
+	//cand revii reuitate cum ai putea rescrie aceasta functie
 
 	const handleRegister = async (event) => {
 		event.preventDefault();
 		try {
-			const { data } = await saveUser(values);
-      setUserData(data);
-			const formData = new FormData();
-			formData.append("file", file, file.name);
-			formData.append("id", data.id);
-			console.log("User registered successfully", data);
-			document.getElementById("modal").close();
+			const { data: userData } = await saveUser(values);
+			userData.append("file", file, file.name);
+			userData.append("id", data.id);
+
+			setUserData(userData);
+			// Închide dialogul
+			dialogRef.current.close();
+
+			// Redirecționează către profilul utilizatorului
+			window.location.href = `/elections/${data.id}`;
+
+			//getAllUsers();
 		} catch (error) {
 			console.error("Error registering user", error);
 		}
 	};
 
-  const handleToggleParticipation = (userId) => userId.electionParticipation = true;
-
+	const handleToggleParticipation = (userId) => (userId.electionParticipation = true);
 
 	useEffect(() => {
-    if (dialogRef.current) {
+		if (userData.id) {
 			dialogRef.current.showModal();
 		}
 		getCandidates();
@@ -109,15 +121,16 @@ function App() {
 					</form>
 				</div>
 			</dialog>
-			{/* Vreau nu sa transmit toaa data de la users ci de la unul specific adica cel de la profilul meu */}
-			<Header toggleParticipation={() => handleToggleParticipation(userData.id)} numberOfParticipants={data.totalElements} />
+
+			<Header userData={userData.id} toggleParticipation={() => handleToggleParticipation(userData.id)} numberOfParticipants={data.totalElements} />
+
 			<main className="main">
 				<div className="container">
 					<Routes>
 						<Route path="/" element={<Navigate to={"/elections"} />} />
 						<Route path="/elections" element={<Participants data={data} currentPage={currentPage} getAllCandidates={getCandidates} />} />
 						<Route path="/elections/users" element={<Participants data={usersData} currentPage={currentPage} getAllCandidates={getUsers} />} />
-						<Route path="/elections/profile" element={<Profile />} />
+						<Route path="/elections/:id" element={<Profile />} />
 					</Routes>
 				</div>
 			</main>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Header = ({ toggleParticipation, numberOfParticipants }) => {
+const Header = ({ userData, toggleParticipation, numberOfParticipants }) => {
 	return (
 		<header className="header">
 			<div className="container">
@@ -14,7 +14,7 @@ const Header = ({ toggleParticipation, numberOfParticipants }) => {
 				<button onClick={toggleParticipation} className="btn">
 					<i className="bi bi-plus-square"></i> Enter Election
 				</button>
-				<Link to="/elections/profile" className="btn">
+				<Link to={`/elections/${userData}`} className="btn">
 					<i className="bi bi-person-circle"></i> Profile
 				</Link>
 			</div>

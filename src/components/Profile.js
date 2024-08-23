@@ -1,7 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 //Set the contactDetail here as profile 
 //and then provide the an alternative to save as profile
-function Profile() {
+function Profile({updateUser, updateImage}) {
+	const [user, setUser] = useState({
+		id: "",
+		name: "",
+		email: "",
+		password: "",
+		electionParticipation: false,
+		votes: 0,
+		photoUrl: "",
+	});
+
+
+
 	return (
 		<header className="header">
 			<div className="container">
