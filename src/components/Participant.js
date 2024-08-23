@@ -10,15 +10,15 @@ function Participant({ user }) {
 					<img src={user.photoUrl} alt={user.name} />
 				</div>
 				<div className="contact__details">
-					<p className="contact_name">{user.name.substring(0, 15)}</p>
+					<p className="contact_name">{user.name}</p>
 				</div>
 			</div>
 			<div className="contact__body">
 				<p>
-					<i className="bi bi-envelope"></i> {user.email.substring(0, 20)}
+					<i className="bi bi-envelope"></i> {user.email}
 				</p>
 				<p>
-					<i className="bi bi-body-text"></i> {user.description ? user.description.substring(0, 20) : ""}
+					<i className="bi bi-body-text"></i> {user.description ? user.description : ""}
 				</p>
 				<p>
 					<i className="bi bi-hand-thumbs-up"></i> {user.votes}

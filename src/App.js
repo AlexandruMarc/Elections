@@ -3,7 +3,7 @@ import "./App.css";
 import { getAllCandidates, getAllUsers, saveUser } from "./api/ElectionService";
 import Profile from "./components/Profile";
 import Header from "./components/Header";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Participants from "./components/Participants";
 
 function App() {
@@ -27,6 +27,8 @@ function App() {
 		photo: "",
 	});
 
+	const navigate = useNavigate(); // useNavigate hook pentru navigare
+
 	const getCandidates = async (page = 0, size = 10) => {
 		try {
 			setCurrentPage(page);
@@ -38,7 +40,7 @@ function App() {
 		}
 	};
 
-	const getUsers = async (page = 0, size = 10) => {
+	const getUsers = async (page = 0, size = 4) => {
 		try {
 			setCurrentPage(page);
 			const { data } = await getAllUsers(page, size);
@@ -53,37 +55,68 @@ function App() {
 		setValues({ ...values, [event.target.name]: event.target.value });
 	};
 
-	//cand revii reuitate cum ai putea rescrie aceasta functie
-
 	const handleRegister = async (event) => {
 		event.preventDefault();
 		try {
 			const { data: userData } = await saveUser(values);
-			userData.append("file", file, file.name);
-			userData.append("id", data.id);
-
-			setUserData(userData);
+	
+			const formData = new FormData();
+			formData.append("file", file, file.name);
+			formData.append("id", userData.id);
+	
 			// Închide dialogul
 			dialogRef.current.close();
-
+	
+			// Actualizează starea cu datele utilizatorului
+			setUserData(userData);
+	
+			// Salvează ID-ul utilizatorului în localStorage
+			localStorage.setItem("userId", userData.id);
+	
 			// Redirecționează către profilul utilizatorului
-			window.location.href = `/elections/${data.id}`;
-
-			//getAllUsers();
+			navigate(`/elections/${userData.id}`);
 		} catch (error) {
 			console.error("Error registering user", error);
 		}
 	};
+	
+	//Implement the logout method 
+	// const handleLogout = () => {
+	// 	// Șterge ID-ul utilizatorului din localStorage
+	// 	localStorage.removeItem("userId");
+	
+	// 	// Resetează starea aplicației
+	// 	setUserData({
+	// 		id: "",
+	// 		name: "",
+	// 		email: "",
+	// 		password: "",
+	// 		photo: "",
+	// 	});
+	
+	// 	// Opțional, redirecționează către pagina de login sau home
+	// 	navigate("/login");
+	// };
+	
+	
 
 	const handleToggleParticipation = (userId) => (userId.electionParticipation = true);
 
 	useEffect(() => {
-		// if (userData.id) {
-		// 	dialogRef.current.showModal();
-		// }
+		const storedUserId = localStorage.getItem("userId");
+		
+		if (storedUserId) {
+			// Dacă există un ID salvat în localStorage, îl setăm în state
+			setUserData(prevData => ({ ...prevData, id: storedUserId }));
+		} else {
+			// Dacă nu există ID, afișăm dialogul de înregistrare
+			dialogRef.current.showModal();
+		}
+	
 		getCandidates();
 		getUsers();
 	}, []);
+	
 
 	return (
 		<>
