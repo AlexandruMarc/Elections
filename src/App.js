@@ -78,9 +78,9 @@ function App() {
 	const handleToggleParticipation = (userId) => (userId.electionParticipation = true);
 
 	useEffect(() => {
-		if (userData.id) {
-			dialogRef.current.showModal();
-		}
+		// if (userData.id) {
+		// 	dialogRef.current.showModal();
+		// }
 		getCandidates();
 		getUsers();
 	}, []);
