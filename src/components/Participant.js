@@ -18,7 +18,7 @@ function Participant({ user }) {
 					<i className="bi bi-envelope"></i> {user.email}
 				</p>
 				<p>
-					<i className="bi bi-body-text"></i> {user.description ? user.description : ""}
+					<i className="bi bi-body-text"></i> {user.description ? user.description.substring(0, 150) : ""}
 				</p>
 				<p>
 					<i className="bi bi-hand-thumbs-up"></i> {user.votes}

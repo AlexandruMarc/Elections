@@ -487,40 +487,6 @@ dialog[open] {
 	animation: fadeIn 0.8s ease normal;
 }
 
-@keyframes fadeIn {
-	from {
-		opacity: 0;
-	}
-
-	to {
-		opacity: 1;
-	}
-}
-
-/* Media Queries */
-
-@media (max-width: 900px) {
-	.profile {
-		grid-template-columns: repeat(auto-fit, minmax(80%, 1fr));
-	}
-}
-
-@media (max-width: 389px) {
-	.profile__details {
-		justify-content: center;
-		place-self: center;
-		width: 100%;
-	}
-
-	.profile__settings {
-		place-self: center;
-	}
-
-	.profile__metadata {
-		text-align: center;
-	}
-}
-
 /* IMPORTED STYLES */
 .user-details {
 	display: flex;
@@ -582,33 +548,4 @@ input[type="file"]::file-selector-button:hover {
 
 .form_footer .btn {
 	padding: 7px 15px;
-}
-
-@media (max-width: 584px) {
-	/* .container{
-	max-width: 100%;
-  } */
-	form .user-details .input-box {
-		margin-bottom: 15px;
-		width: 100%;
-	}
-
-	form .category {
-		width: 100%;
-	}
-
-	/* .user-details {
-		max-height: 300px;
-		overflow-y: scroll;
-	} */
-
-	.user-details::-webkit-scrollbar {
-		width: 5px;
-	}
-}
-
-@media (max-width: 459px) {
-	/* .container .content .category{
-	  flex-direction: column;
-	} */
 }
