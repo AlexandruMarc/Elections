@@ -289,16 +289,6 @@ i {
 	font-weight: 600;
 }
 
-.contact_title {
-	font-size: 11px;
-	background-color: #dfe7e8;
-	color: var(--kappel);
-	text-align: center;
-	border-radius: 13px;
-	font-weight: 600;
-	padding: 2px;
-}
-
 .user__body {
 	margin-top: 1rem;
 }
