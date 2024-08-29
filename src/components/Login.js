@@ -15,7 +15,7 @@ const Login = () => {
 		try {
 			const data = await login(values);
 			if (typeof data === "object" && data !== null) {
-				// Datele au fost returnate corect
+				// The data returned correctly
 				return { success: true, data };
 			} else {
 				// In case the data is not a valid object
