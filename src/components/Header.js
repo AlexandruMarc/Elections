@@ -5,7 +5,7 @@ const Header = ({ userData, electionParticipation, toggleParticipation, numberOf
 	return (
 		<header className="header">
 			<div className="container">
-				<Link to="/elections/candidates">
+				<Link to="/elections/candidates" className="link">
 					<h3>Participants ({numberOfParticipants})</h3>
 				</Link>
 				<Link to="/elections/users" className="btn">

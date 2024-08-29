@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
-
+import { useParams, useNavigate } from "react-router-dom";
+import { toastSuccess, toastError } from "../api/ToastService";
 import { getUserProfile } from "../api/ElectionService";
-//Set the userDetail here as profile
-//and then provide the an alternative to save as profile
+
 function Profile({ updateUser, updateImage }) {
+	const navigate = useNavigate();
 	const inputRef = useRef();
 	const [user, setUser] = useState({
 		name: "",
@@ -21,7 +21,6 @@ function Profile({ updateUser, updateImage }) {
 		try {
 			const { data } = await getUserProfile(id);
 			setUser(data);
-			console.log("User retrieved successfully", data);
 		} catch (error) {
 			console.error("Error fetching user:", error);
 		}
@@ -33,7 +32,6 @@ function Profile({ updateUser, updateImage }) {
 
 	const onChange = (event) => {
 		setUser({ ...user, [event.target.name]: event.target.value });
-		//console.log("File: App.js", "Line 36:", values);
 	};
 
 	const updatePhoto = async (file) => {
@@ -46,10 +44,10 @@ function Profile({ updateUser, updateImage }) {
 				...prev,
 				photoUrl: `${prev.photoUrl}?updated_at=${new Date().getTime()}`,
 			}));
-			//toastSuccess("Photo updated successfully");
+			toastSuccess("Photo updated successfully");
 		} catch (error) {
-			console.log(error);
-			//toastError(error.messages);
+			//console.log(error);
+			toastError(error.messages);
 		}
 	};
 
@@ -57,15 +55,30 @@ function Profile({ updateUser, updateImage }) {
 		event.preventDefault();
 		await updateUser(user);
 		fetchUser(id);
-		console.log("Contact updated successfully");
+		//console.log("User updated successfully");
+		toastSuccess("User updated successfully");
+	};
 
-		//toastSuccess("Contact updated successfully");
+	const handleLogout = () => {
+		localStorage.removeItem("userId");
+		localStorage.removeItem("electionParticipation");
+		setUser({
+			name: "",
+			email: "",
+			password: "",
+			description: "",
+			electionParticipation: false,
+			votes: 0,
+			photoUrl: "",
+		});
+		navigate("/elections/login");
+		toastSuccess("Loged Out successfully");
 	};
 
 	useEffect(() => {
 		fetchUser(id);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		toastSuccess("Welcome to your Profile");
+	}, [id]);
 
 	return (
 		<>
@@ -101,15 +114,14 @@ function Profile({ updateUser, updateImage }) {
 									<span className="details">Votes</span>
 									<input type="text" value={user.votes} onChange={onChange} name="votes" readOnly />
 								</div>
-
 								<div className="input-box">
 									<span className="details">Election Participation</span>
-									<input type="text" value={user.electionParticipation} onChange={onChange} name="status" readOnly />
+									<input type="text" value={user.electionParticipation ? "candidate" : "User"} onChange={onChange} name="status" readOnly />
 								</div>
 								<div className="input-box">
 									<span className="details">Description</span>
 									<textarea
-										value={user.description}
+										value={user.description || ""}
 										onChange={onChange}
 										name="description"
 										style={{
@@ -131,6 +143,11 @@ function Profile({ updateUser, updateImage }) {
 								</button>
 							</div>
 						</form>
+						<div className="form_footer">
+							<button onClick={handleLogout} className="btn">
+								Logout
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>

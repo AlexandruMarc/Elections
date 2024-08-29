@@ -7,7 +7,8 @@ function Participants({ data, currentPage, getAllCandidates }) {
 		<main className="main">
 			{data?.content?.length === 0 && <div>No Candidates</div>}
 
-			<ul className="contact__list">{data?.content?.length > 0 && data?.content?.map((candidate) => <Participant user={candidate} key={candidate.id} />)}</ul>
+			{/* Displaying the candidates */}
+			<ul className="user__list">{data?.content?.length > 0 && data?.content?.map((candidate) => <Participant user={candidate} key={candidate.id} />)}</ul>
 
 			{/* In case that here are multiple pages of candidates and I want to move between them */}
 			{data?.content?.length > 0 && data?.totalPages > 1 && (

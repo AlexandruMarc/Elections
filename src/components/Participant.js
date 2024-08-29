@@ -1,19 +1,18 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
 
 function Participant({ user }) {
 	return (
-		<Link to={`/elections/${user.id}`} className="contact__item">
-			<div className="contact__header">
-				<div className="contact__image">
+		<Link to={`/elections/${user.id}`} className="user__item">
+			<div className="user__header">
+				<div className="user__image">
 					<img src={user.photoUrl} alt={user.name} />
 				</div>
-				<div className="contact__details">
-					<p className="contact_name">{user.name}</p>
+				<div className="user__details">
+					<p className="user__name">{user.name}</p>
 				</div>
 			</div>
-			<div className="contact__body">
+			<div className="user__body">
 				<p>
 					<i className="bi bi-envelope"></i> {user.email}
 				</p>
@@ -23,7 +22,9 @@ function Participant({ user }) {
 				<p>
 					<i className="bi bi-hand-thumbs-up"></i> {user.votes}
 				</p>
-				<p>{user.electionParticipation === true ? <i className="bi bi-check-circle"></i> : <i className="bi bi-x-circle"></i>} Candidate</p>
+				<p>
+					{user.electionParticipation === true ? <i className="bi bi-check-circle"></i> : <i className="bi bi-x-circle"></i>} {user.electionParticipation ? "Candidate" : "User"}
+				</p>
 			</div>
 		</Link>
 	);
