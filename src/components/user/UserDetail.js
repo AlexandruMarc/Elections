@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getUser, updateUser } from "../api/ElectionService";
-import { toastSuccess } from "../api/ToastService";
+import { getUser, updateUser } from "../../api/ElectionService";
+import { toastSuccess } from "../../api/ToastService";
 
-const UserDetail = () => {
+function UserDetail() {
 	const [user, setUser] = useState({
 		name: "",
 		email: "",
@@ -85,7 +85,6 @@ const UserDetail = () => {
 										{hasLiked ? "Voted" : "Vote"}
 									</button>
 								</div>
-
 								<div className="input-box">
 									<span className="details">Election Participation</span>
 									<input type="text" value={user.electionParticipation ? "candidate" : "User"} name="status" readOnly />

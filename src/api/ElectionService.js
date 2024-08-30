@@ -6,6 +6,7 @@ const API_URL = "http://localhost:8080/elections";
 export async function saveUser(user) {
 	return await axios.post(`${API_URL}/register`, user);
 }
+
 export async function login({ email, password }) {
 	try {
 		const response = await axios.post(`${API_URL}/login`, { email, password });
@@ -26,9 +27,6 @@ export async function getAllUsers(page = 0, size = 10) {
 
 export async function getUser(id) {
 	return await axios.get(`${API_URL}/${id}`);
-}
-export async function getUserProfile(id) {
-	return await axios.get(`${API_URL}/profile/${id}`);
 }
 
 export async function updateUser(user) {

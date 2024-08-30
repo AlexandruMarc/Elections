@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { saveUser } from "../api/ElectionService";
-import { toastInfo, toastSuccess, toastWarning } from "../api/ToastService";
+import { saveUser } from "../../api/ElectionService";
+import { toastInfo, toastSuccess, toastWarning } from "../../api/ToastService";
 
-const Register = () => {
+function Register() {
 	const navigate = useNavigate();
 	const [values, setValues] = useState({
 		name: "",
@@ -62,24 +62,17 @@ const Register = () => {
 							</div>
 						</div>
 						<div className="form_footer">
-							<button type="submit" className="btn">
-								Submit
-							</button>
+							<button type="submit" className="btn">Submit</button>
 						</div>
 					</form>
 					<div className="form_footer">
-						<p>
-							Do you have an account?{" "}
-							<a href="/elections/login">
-								{" "}
-								<i className="bi bi-arrow-right-circle-fill"></i>Login
-							</a>
+						<p>Do you have an account?{" "} <a href="/elections/login"> {" "} <i className="bi bi-arrow-right-circle-fill"></i>Login</a>
 						</p>
 					</div>
 				</div>
 			</div>
 		</>
 	);
-};
+}
 
 export default Register;

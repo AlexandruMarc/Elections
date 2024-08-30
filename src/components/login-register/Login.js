@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../api/ElectionService";
-import { toastSuccess, toastError } from "../api/ToastService";
+import { login } from "../../api/ElectionService";
+import { toastSuccess, toastError } from "../../api/ToastService";
 
-const Login = () => {
+function Login() {
 	const navigate = useNavigate();
 	const [values, setValues] = useState({
 		email: "",
@@ -79,18 +79,13 @@ const Login = () => {
 						</div>
 					)}
 					<div className="form_footer">
-						<p>
-							Don't have an account?{" "}
-							<a href="/elections/register">
-								{" "}
-								<i className="bi bi-arrow-right-circle-fill"></i>Register
-							</a>
+						<p>Don't have an account?{" "} <a href="/elections/register"> {" "} <i className="bi bi-arrow-right-circle-fill"></i>Register</a>
 						</p>
 					</div>
 				</div>
 			</div>
 		</>
 	);
-};
+}
 
 export default Login;

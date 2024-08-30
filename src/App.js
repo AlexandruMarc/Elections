@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { getAllCandidates, getAllUsers, saveUser, getUser, updatePhoto } from "./api/ElectionService";
-import Profile from "./components/Profile";
-import Header from "./components/Header";
+import Profile from "./components/user/Profile";
+import Header from "./components/header/Header";
 import { Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
-import Participants from "./components/Participants";
-import UserDetail from "./components/UserDetail";
-import Register from "./components/Register";
-import Login from "./components/Login";
+import Participants from "./components/candidates/Participants";
+import UserDetail from "./components/user/UserDetail";
+import Register from "./components/login-register/Register";
+import Login from "./components/login-register/Login";
 import { toastSuccess, toastError } from "./api/ToastService";
 
 function App() {

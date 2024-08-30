@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { toastSuccess, toastError } from "../api/ToastService";
-import { getUserProfile } from "../api/ElectionService";
+import { getUser } from "../../api/ElectionService";
+import { toastError, toastSuccess } from "../../api/ToastService";
 
 function Profile({ updateUser, updateImage }) {
 	const navigate = useNavigate();
@@ -19,7 +19,7 @@ function Profile({ updateUser, updateImage }) {
 	const { id } = useParams();
 	const fetchUser = async (id) => {
 		try {
-			const { data } = await getUserProfile(id);
+			const { data } = await getUser(id);
 			setUser(data);
 		} catch (error) {
 			console.error("Error fetching user:", error);
