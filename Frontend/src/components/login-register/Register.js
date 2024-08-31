@@ -13,7 +13,7 @@ function Register() {
 		photo: "",
 	});
 
-	const handleRegister = async (event) => {
+	async function handleRegister(event) {
 		event.preventDefault();
 		try {
 			const { data } = await saveUser(values);
@@ -32,11 +32,11 @@ function Register() {
 				toastInfo("Please go to the Login page!, Thanks!");
 			}, 2000);
 		}
-	};
+	}
 
-	const onChange = (event) => {
+	function onChange(event) {
 		setValues({ ...values, [event.target.name]: event.target.value });
-	};
+	}
 
 	return (
 		<>
@@ -50,23 +50,32 @@ function Register() {
 						<div className="user-details">
 							<div className="input-box">
 								<span className="details">Name</span>
-								<input type="text" value={values.name} onChange={onChange} name="name" required />
+								<input type="text" value={values.name} 
+										onChange={onChange} name="name" required />
 							</div>
 							<div className="input-box">
 								<span className="details">Email</span>
-								<input type="email" value={values.email} onChange={onChange} name="email" required />
+								<input type="email" value={values.email} 
+										onChange={onChange} name="email" required />
 							</div>
 							<div className="input-box">
 								<span className="details">Password</span>
-								<input type="password" value={values.password} onChange={onChange} name="password" required />
+								<input type="password" value={values.password} 
+										onChange={onChange} name="password" required />
 							</div>
 						</div>
 						<div className="form_footer">
-							<button type="submit" className="btn">Submit</button>
+							<button type="submit" className="btn">
+								Submit
+							</button>
 						</div>
 					</form>
 					<div className="form_footer">
-						<p>Do you have an account?{" "} <a href="/elections/login"> {" "} <i className="bi bi-arrow-right-circle-fill"></i>Login</a>
+						<p>Do you have an account?{" "}
+							<a href="/elections/login">
+								{" "}
+								<i className="bi bi-arrow-right-circle-fill"></i>Login
+							</a>
 						</p>
 					</div>
 				</div>

@@ -18,7 +18,7 @@ const Header = () => {
 	const userData = localStorage.getItem("userId");
 
 	//Handles the participation
-	const handleToggleParticipation = async (value) => {
+	async function handleToggleParticipation(value) {
 		const storedUserId = localStorage.getItem("userId");
 		const { data } = await getUser(storedUserId);
 		console.log(data);
@@ -26,12 +26,12 @@ const Header = () => {
 		await saveUser(data);
 		toggleParticipation(value);
 		toastSuccess("The participation in the voting has been updated!");
-	};
+	}
 
-	const toggleParticipation = (status) => {
+	function toggleParticipation(status) {
 		setElectionParticipation(status);
 		localStorage.setItem("electionParticipation", status);
-	};
+	}
 
 	useEffect(() => {
 		getNrOfParticipants();

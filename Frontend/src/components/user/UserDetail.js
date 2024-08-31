@@ -12,10 +12,9 @@ function UserDetail() {
 		votes: 0,
 		photoUrl: "",
 	});
-
 	const { id } = useParams();
 
-	const fetchUser = async (id) => {
+	async function fetchUser(id) {
 		try {
 			const { data } = await getUser(id);
 			setUser(data);
@@ -23,21 +22,21 @@ function UserDetail() {
 		} catch (error) {
 			console.error("Error fetching user:", error);
 		}
-	};
+	}
 
 	//For handling user vote that he cannot vote more than once
 	const userId = localStorage.getItem("userId");
 	const likedKey = `liked_${userId}_${id}`;
 	const [hasLiked, setHasLiked] = useState(false);
 
-	const handleLike = () => {
+	function handleLike() {
 		if (!hasLiked) {
 			localStorage.setItem(likedKey, "true");
 			setHasLiked(true);
 		}
-	};
+	}
 
-	const onClick = async (event) => {
+	async function onClick(event) {
 		event.preventDefault();
 		setUser((prev) => ({ ...prev }));
 		user.votes += 1;
@@ -45,7 +44,7 @@ function UserDetail() {
 		fetchUser(id);
 		handleLike();
 		toastSuccess("Succesfully voted for -> " + user.name);
-	};
+	}
 
 	useEffect(() => {
 		// checks if user already voted for this candidate
@@ -114,6 +113,6 @@ function UserDetail() {
 			</div>
 		</>
 	);
-};
+}
 
 export default UserDetail;
