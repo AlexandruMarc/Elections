@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Participant({ user }) {
+function Card({ user }) {
 	return (
 		<Link to={`/elections/${user.id}`} className="user__item">
 			<div className="user__header">
@@ -22,4 +22,4 @@ function Participant({ user }) {
 	);
 }
 
-export default Participant;
+export default Card;

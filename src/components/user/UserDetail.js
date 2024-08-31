@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getUser, updateUser } from "../../api/ElectionService";
-import { toastSuccess } from "../../api/ToastService";
+import { getUser, updateUser } from "../../utils/ElectionService";
+import { toastSuccess } from "../../utils/ToastService";
 
 function UserDetail() {
 	const [user, setUser] = useState({

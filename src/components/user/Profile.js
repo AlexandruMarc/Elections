@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getUser } from "../../api/ElectionService";
-import { toastError, toastSuccess } from "../../api/ToastService";
+import { getUser, saveUser, updatePhoto } from "../../utils/ElectionService";
+import { toastError, toastSuccess } from "../../utils/ToastService";
 
-function Profile({ updateUser, updateImage }) {
+function Profile() {
 	const navigate = useNavigate();
 	const inputRef = useRef();
 	const [user, setUser] = useState({
@@ -34,12 +34,16 @@ function Profile({ updateUser, updateImage }) {
 		setUser({ ...user, [event.target.name]: event.target.value });
 	};
 
-	const updatePhoto = async (file) => {
+	const updateImage = async (file) => {
 		try {
 			const formData = new FormData();
 			formData.append("file", file, file.name);
 			formData.append("id", id);
-			await updateImage(formData);
+			try {
+				await updatePhoto(formData);
+			} catch (error) {
+				console.error("Error updating image:", error);
+			}
 			setUser((prev) => ({
 				...prev,
 				photoUrl: `${prev.photoUrl}?updated_at=${new Date().getTime()}`,
@@ -51,9 +55,15 @@ function Profile({ updateUser, updateImage }) {
 		}
 	};
 
+	//Updates the user
 	const onUpdateUser = async (event) => {
 		event.preventDefault();
-		await updateUser(user);
+		try {
+			await saveUser(user);
+		} catch (error) {
+			console.error("Error updating contact:", error);
+			toastError(error.messages);
+		}
 		fetchUser(id);
 		//console.log("User updated successfully");
 		toastSuccess("User updated successfully");
@@ -153,7 +163,7 @@ function Profile({ updateUser, updateImage }) {
 			</div>
 
 			<form style={{ display: "none" }}>
-				<input type="file" ref={inputRef} onChange={(event) => updatePhoto(event.target.files[0])} name="file" accept="image/*" />
+				<input type="file" ref={inputRef} onChange={(event) => updateImage(event.target.files[0])} name="file" accept="image/*" />
 			</form>
 		</>
 	);

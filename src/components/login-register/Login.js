@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../api/ElectionService";
-import { toastSuccess, toastError } from "../../api/ToastService";
+import { login } from "../../utils/ElectionService";
+import { toastSuccess, toastError } from "../../utils/ToastService";
 
 function Login() {
 	const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { saveUser } from "../../api/ElectionService";
-import { toastInfo, toastSuccess, toastWarning } from "../../api/ToastService";
+import { saveUser } from "../../utils/ElectionService";
+import { toastInfo, toastSuccess, toastWarning } from "../../utils/ToastService";
 
 function Register() {
 	const navigate = useNavigate();
