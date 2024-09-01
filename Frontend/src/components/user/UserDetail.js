@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getUser, updateUser } from "../../utils/ElectionService";
 import { toastSuccess } from "../../utils/ToastService";
+import Header from "../header/Header";
 
 function UserDetail() {
 	const [user, setUser] = useState({
@@ -57,6 +58,7 @@ function UserDetail() {
 
 	return (
 		<>
+			<Header />
 			<div className="profile">
 				<div className="profile__details">
 					<img src={user.photoUrl} alt={`Profile of ${user.name}`} />

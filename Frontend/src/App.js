@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import Profile from "./components/user/Profile";
-import Header from "./components/header/Header";
 import { Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
 import UserDetail from "./components/user/UserDetail";
 import Register from "./components/login-register/Register";
@@ -27,8 +26,6 @@ function App() {
 
 	return (
 		<>
-			{/* Display the header only if not on the login or register page */}
-			{!isAuthPage && <Header />}
 			<ToastContainer />
 			<main className="main">
 				<div className="container">
