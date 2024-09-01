@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { getAllCandidates, getUser, saveUser } from "../../utils/ElectionService";
 import { toastSuccess } from "../../utils/ToastService";
 
-const Header = () => {
+function Header() {
 	const [electionParticipation, setElectionParticipation] = useState(() => {
 		const savedStatus = localStorage.getItem("electionParticipation");
 		return savedStatus === "false";
@@ -61,6 +61,6 @@ const Header = () => {
 			</div>
 		</header>
 	);
-};
+}
 
 export default Header;
