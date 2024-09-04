@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getAllCandidates, getUser, saveUser } from "../../utils/ElectionService";
+import {
+	getAllCandidates,
+	getUser,
+	saveUser,
+} from "../../utils/ElectionService";
 import { toastSuccess } from "../../utils/ToastService";
 
 function Header() {
@@ -47,11 +51,17 @@ function Header() {
 					All Users
 				</Link>
 				{electionParticipation ? (
-					<button onClick={() => handleToggleParticipation(true)} className="btn">
+					<button
+						onClick={() => handleToggleParticipation(true)}
+						className="btn"
+					>
 						<i className="bi bi-plus-square"></i> Enter Election
 					</button>
 				) : (
-					<button onClick={() => handleToggleParticipation(false)} className="btn">
+					<button
+						onClick={() => handleToggleParticipation(false)}
+						className="btn"
+					>
 						<i className="bi bi-dash-square"></i> Leave Election
 					</button>
 				)}

@@ -19,12 +19,19 @@ function Login() {
 				return { success: true, data };
 			} else {
 				// In case the data is not a valid object
-				return { success: false, error: "Invalid response from server" };
+				return {
+					success: false,
+					error: "Invalid response from server",
+				};
 			}
 		} catch (error) {
 			// Handle the error returned by the backend
-			return { success: false, error: error.message 
-						|| "Email or Password are not correct! Please try again." };
+			return {
+				success: false,
+				error:
+					error.message ||
+					"Email or Password are not correct! Please try again.",
+			};
 		}
 	}
 
@@ -35,7 +42,10 @@ function Login() {
 
 		if (result.success) {
 			localStorage.setItem("userId", result.data.id);
-			localStorage.setItem("electionParticipation", result.data.electionParticipation);
+			localStorage.setItem(
+				"electionParticipation",
+				result.data.electionParticipation
+			);
 			navigate(`/elections/profile/${result.data.id}`);
 			toastSuccess("Loged in successfully");
 		} else {
@@ -61,13 +71,23 @@ function Login() {
 						<div className="user-details">
 							<div className="input-box">
 								<span className="details">Email</span>
-								<input type="email" value={values.email} 
-										onChange={onChange} name="email" required />
+								<input
+									type="email"
+									value={values.email}
+									onChange={onChange}
+									name="email"
+									required
+								/>
 							</div>
 							<div className="input-box">
 								<span className="details">Password</span>
-								<input type="password" value={values.password} 
-										onChange={onChange} name="password" required />
+								<input
+									type="password"
+									value={values.password}
+									onChange={onChange}
+									name="password"
+									required
+								/>
 							</div>
 						</div>
 						<div className="form_footer">
@@ -82,10 +102,13 @@ function Login() {
 						</div>
 					)}
 					<div className="form_footer">
-						<p> Don't have an account?{" "}
+						<p>
+							{" "}
+							Don't have an account?{" "}
 							<a href="/elections/register">
 								{" "}
-								<i className="bi bi-arrow-right-circle-fill"></i>Register
+								<i className="bi bi-arrow-right-circle-fill"></i>
+								Register
 							</a>
 						</p>
 					</div>

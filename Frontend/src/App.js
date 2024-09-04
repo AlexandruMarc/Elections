@@ -2,7 +2,13 @@ import { useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import Profile from "./components/user/Profile";
-import { Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
+import {
+	Routes,
+	Route,
+	Navigate,
+	useLocation,
+	useNavigate,
+} from "react-router-dom";
 import UserDetail from "./components/user/UserDetail";
 import Register from "./components/login-register/Register";
 import Login from "./components/login-register/Login";
@@ -13,7 +19,9 @@ function App() {
 	const navigate = useNavigate();
 	const userFromLocalStorage = localStorage.getItem("userId");
 
-	const isAuthPage = location.pathname === "/elections/register" || location.pathname === "/elections/login";
+	const isAuthPage =
+		location.pathname === "/elections/register" ||
+		location.pathname === "/elections/login";
 
 	useEffect(() => {
 		// Redirect users based on their login status and current route
@@ -30,14 +38,32 @@ function App() {
 			<main className="main">
 				<div className="container">
 					<Routes>
-						<Route path="/" element={<Navigate to="/elections" />} />
-						<Route path="/elections" element={<Navigate to="/elections/candidates" />} />
-						<Route path="/elections/register" element={<Register />} />
+						<Route
+							path="/"
+							element={<Navigate to="/elections" />}
+						/>
+						<Route
+							path="/elections"
+							element={<Navigate to="/elections/candidates" />}
+						/>
+						<Route
+							path="/elections/register"
+							element={<Register />}
+						/>
 						<Route path="/elections/login" element={<Login />} />
-						<Route path="/elections/candidates" element={<DisplaingUsers />} />
-						<Route path="/elections/users" element={<DisplaingUsers />} />
+						<Route
+							path="/elections/candidates"
+							element={<DisplaingUsers />}
+						/>
+						<Route
+							path="/elections/users"
+							element={<DisplaingUsers />}
+						/>
 						<Route path="/elections/:id" element={<UserDetail />} />
-						<Route path="/elections/profile/:id" element={<Profile />} />
+						<Route
+							path="/elections/profile/:id"
+							element={<Profile />}
+						/>
 					</Routes>
 				</div>
 			</main>

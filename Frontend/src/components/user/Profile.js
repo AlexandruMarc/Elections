@@ -109,26 +109,67 @@ function Profile() {
 					<div>
 						<form onSubmit={onUpdateUser} className="form">
 							<div className="user-details">
-								<input type="hidden" defaultValue={user.id} name="id" required />
+								<input
+									type="hidden"
+									defaultValue={user.id}
+									name="id"
+									required
+								/>
 								<div className="input-box">
 									<span className="details">Name</span>
-									<input type="text" value={user.name} onChange={onChange} name="name" required />
+									<input
+										type="text"
+										value={user.name}
+										onChange={onChange}
+										name="name"
+										required
+									/>
 								</div>
 								<div className="input-box">
 									<span className="details">Email</span>
-									<input type="text" value={user.email} onChange={onChange} name="email" required />
+									<input
+										type="text"
+										value={user.email}
+										onChange={onChange}
+										name="email"
+										required
+									/>
 								</div>
 								<div className="input-box">
 									<span className="details">Password</span>
-									<input type="text" value={user.password} onChange={onChange} name="password" required />
+									<input
+										type="text"
+										value={user.password}
+										onChange={onChange}
+										name="password"
+										required
+									/>
 								</div>
 								<div className="input-box">
 									<span className="details">Votes</span>
-									<input type="text" value={user.votes} onChange={onChange} name="votes" readOnly />
+									<input
+										type="text"
+										value={user.votes}
+										onChange={onChange}
+										name="votes"
+										readOnly
+									/>
 								</div>
 								<div className="input-box">
-									<span className="details">Election Participation</span>
-									<input type="text" value={user.electionParticipation ? "candidate" : "User"} onChange={onChange} name="status" readOnly />
+									<span className="details">
+										Election Participation
+									</span>
+									<input
+										type="text"
+										value={
+											user.electionParticipation
+												? "candidate"
+												: "User"
+										}
+										onChange={onChange}
+										name="status"
+										readOnly
+									/>
 								</div>
 								<div className="input-box">
 									<span className="details">Description</span>
@@ -146,7 +187,8 @@ function Profile() {
 											backgroundColor: "#f9f9f9",
 											resize: "none",
 											outline: "none",
-										}}></textarea>
+										}}
+									></textarea>
 								</div>
 							</div>
 							<div className="form_footer">
@@ -165,7 +207,13 @@ function Profile() {
 			</div>
 
 			<form style={{ display: "none" }}>
-				<input type="file" ref={inputRef} onChange={(event) => updateImage(event.target.files[0])} name="file" accept="image/*" />
+				<input
+					type="file"
+					ref={inputRef}
+					onChange={(event) => updateImage(event.target.files[0])}
+					name="file"
+					accept="image/*"
+				/>
 			</form>
 		</>
 	);

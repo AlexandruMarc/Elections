@@ -70,25 +70,61 @@ function UserDetail() {
 					<div>
 						<form className="form">
 							<div className="user-details">
-								<input type="hidden" defaultValue={user.id} name="id" readOnly />
+								<input
+									type="hidden"
+									defaultValue={user.id}
+									name="id"
+									readOnly
+								/>
 								<div className="input-box">
 									<span className="details">Name</span>
-									<input type="text" value={user.name} name="name" readOnly />
+									<input
+										type="text"
+										value={user.name}
+										name="name"
+										readOnly
+									/>
 								</div>
 								<div className="input-box">
 									<span className="details">Email</span>
-									<input type="text" value={user.email} name="email" readOnly />
+									<input
+										type="text"
+										value={user.email}
+										name="email"
+										readOnly
+									/>
 								</div>
 								<div className="input-box">
 									<span className="details">Votes</span>
-									<input type="text" value={user.votes} name="votes" readOnly />
-									<button className="btn" style={{ marginTop: "10px" }} onClick={onClick} disabled={hasLiked}>
+									<input
+										type="text"
+										value={user.votes}
+										name="votes"
+										readOnly
+									/>
+									<button
+										className="btn"
+										style={{ marginTop: "10px" }}
+										onClick={onClick}
+										disabled={hasLiked}
+									>
 										{hasLiked ? "Voted" : "Vote"}
 									</button>
 								</div>
 								<div className="input-box">
-									<span className="details">Election Participation</span>
-									<input type="text" value={user.electionParticipation ? "candidate" : "User"} name="status" readOnly />
+									<span className="details">
+										Election Participation
+									</span>
+									<input
+										type="text"
+										value={
+											user.electionParticipation
+												? "candidate"
+												: "User"
+										}
+										name="status"
+										readOnly
+									/>
 								</div>
 								<div className="input-box">
 									<span className="details">Description</span>
@@ -106,7 +142,8 @@ function UserDetail() {
 											resize: "none",
 											outline: "none",
 										}}
-										readOnly></textarea>
+										readOnly
+									></textarea>
 								</div>
 							</div>
 						</form>
