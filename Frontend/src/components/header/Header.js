@@ -22,10 +22,10 @@ function Header({ totalParticipants, onParticipationChange }) {
 	}, [userData]);
 
 	// Function that handles participation changes
-	const handleToggleParticipation = async (value) => {
+	async function handleToggleParticipation(value) {
 		await onParticipationChange(value);
 		setUserParticipation(value);
-	};
+	}
 
 	return (
 		<header className="header">
