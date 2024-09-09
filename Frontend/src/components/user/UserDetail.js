@@ -102,14 +102,16 @@ function UserDetail() {
 										name="votes"
 										readOnly
 									/>
-									<button
-										className="btn"
-										style={{ marginTop: "10px" }}
-										onClick={onClick}
-										disabled={hasLiked}
-									>
-										{hasLiked ? "Voted" : "Vote"}
-									</button>
+									{user.electionParticipation ? (
+										<button
+											className="btn"
+											style={{ marginTop: "10px" }}
+											onClick={onClick}
+											disabled={hasLiked}
+										>
+											{hasLiked ? "Voted" : "Vote"}
+										</button>
+									) : ( "" )}
 								</div>
 								<div className="input-box">
 									<span className="details">
