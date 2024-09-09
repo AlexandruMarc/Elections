@@ -1,70 +1,77 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-	getAllCandidates,
-	getUser,
-	saveUser,
-} from "../../utils/ElectionService";
-import { toastSuccess } from "../../utils/ToastService";
+import { getUser } from "../../utils/ElectionService";
 
-function Header() {
-	const [electionParticipation, setElectionParticipation] = useState(() => {
-		const savedStatus = localStorage.getItem("electionParticipation");
-		return savedStatus === "false";
-	});
-	const [data, setData] = useState({});
-
-	async function getNrOfParticipants(page = 0, size = 5) {
-		const { data: participants } = await getAllCandidates(page, size);
-		setData(participants);
-	}
-
+function Header({ totalParticipants, onParticipationChange }) {
+	const [userParticipation, setUserParticipation] = useState(null);
 	const userData = localStorage.getItem("userId");
 
-	//Handles the participation
-	async function handleToggleParticipation(value) {
-		const storedUserId = localStorage.getItem("userId");
-		const { data } = await getUser(storedUserId);
-		console.log(data);
-		data.electionParticipation = value;
-		await saveUser(data);
-		toggleParticipation(value);
-		toastSuccess("The participation in the voting has been updated!");
-	}
-
-	function toggleParticipation(status) {
-		setElectionParticipation(status);
-		localStorage.setItem("electionParticipation", status);
+	//Function to get user data from the backend on component load
+	async function fetchUserParticipation() {
+		try {
+			const { data } = await getUser(userData);
+			setUserParticipation(data.electionParticipation);
+		} catch (error) {
+			console.log("Error fetching user data", error);
+		}
 	}
 
 	useEffect(() => {
-		getNrOfParticipants();
-	}, []);
+		fetchUserParticipation();
+	}, [userData]);
+
+	// Function that handles participation changes
+	const handleToggleParticipation = async (value) => {
+		await onParticipationChange(value);
+		setUserParticipation(value);
+	};
 
 	return (
 		<header className="header">
 			<div className="container">
-				<Link to="/elections/candidates" className="link">
-					<h3>Participants ({data.totalElements})</h3>
-				</Link>
+				{totalParticipants ? (
+					<Link to="/elections/candidates" className="link">
+						<h3>
+							Participants{" "}
+							<i className="bi bi-arrow-right-circle-fill"></i>
+							{totalParticipants}
+						</h3>
+					</Link>
+				) : (
+					<Link to="/elections/candidates" className="link">
+						<h3>
+							<i className="bi bi-arrow-left-circle-fill"></i>
+							Participants
+						</h3>
+					</Link>
+				)}
 				<Link to="/elections/users" className="btn">
 					All Users
 				</Link>
-				{electionParticipation ? (
-					<button
-						onClick={() => handleToggleParticipation(true)}
-						className="btn"
-					>
-						<i className="bi bi-plus-square"></i> Enter Election
-					</button>
-				) : (
-					<button
-						onClick={() => handleToggleParticipation(false)}
-						className="btn"
-					>
-						<i className="bi bi-dash-square"></i> Leave Election
-					</button>
+
+				{userParticipation !== null && onParticipationChange && (
+					<>
+						{userParticipation ? (
+							<button
+								onClick={() => handleToggleParticipation(false)}
+								className="btn"
+							>
+								<i className="bi bi-dash-square"></i> Leave
+								Election
+							</button>
+						) : (
+							<button
+								onClick={() => handleToggleParticipation(true)}
+								className="btn"
+							>
+								<i className="bi bi-plus-square"></i> Enter
+								Election
+							</button>
+						)}
+					</>
 				)}
+
 				<Link to={`/elections/profile/${userData}`} className="btn">
 					<i className="bi bi-person-circle"></i> Profile
 				</Link>

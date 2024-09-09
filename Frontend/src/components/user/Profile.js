@@ -93,7 +93,7 @@ function Profile() {
 
 	return (
 		<>
-			<Header />
+			<Header totalParticipants={null} onParticipationChange={null} />
 			<div className="profile">
 				<div className="profile__details">
 					<img src={user.photoUrl} alt={`Profile of ${user.name}`} />
